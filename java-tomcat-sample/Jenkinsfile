@@ -16,7 +16,14 @@ pipeline {
             steps {
                 build job: 'Deploy_Application_STG'
             }
-            
+        }
+        stage('Deploy in Production Environment') {
+            steps {
+                timeout(time:5, unit:'DAYS'){
+                    imput message:'Approve Production Deployment'
+                }
+                build job: 'Deploy_Application_Production'
+            }
         }
     }
 }
